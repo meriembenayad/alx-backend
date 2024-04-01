@@ -68,17 +68,15 @@ class Server:
                 'total_page': 'total_page'
             }
         """
-        data_set = self.dataset()
         data_page = self.get_page(page, page_size)
-        start_index, end_index = index_range(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
         return {
             "page_size": page_size,
             "page": page,
             "data": data_page,
-            "next_page": page + 1 if end_index < len(data_set) else None,
-            "prev_page": page - 1 if start_index < len(data_set) else None,
+            "next_page": page + 1 if page < total_pages else None,
+            "prev_page": page - 1 if page < 1 else None,
             "total_page": total_pages
         }
 
