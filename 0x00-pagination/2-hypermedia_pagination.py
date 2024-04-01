@@ -68,15 +68,16 @@ class Server:
                 'total_page': 'total_page'
             }
         """
-        dataset = self.dataset()
-        total_pages = math.ceil(len(dataset) / page_size)
+        data_page = self.get_page(page, page_size)
+        start_index, end_index = index_range(page, page_size)
+        total_pages = math.ceil(len(self.dataset()) / page_size)
 
         return {
-            "page_size": len(dataset),
+            "page_size": page_size,
             "page": page,
-            "data": dataset,
-            "next_page": page + 1 if page < total_pages else None,
-            "prev_page": page - 1 if page < total_pages else None,
+            "data": data_page,
+            "next_page": page + 1 if end_index < len(self.dataset()) else None,
+            "prev_page": page - 1 if start_index < len(self.dataset()) else None,
             "total_page": total_pages
         }
 
