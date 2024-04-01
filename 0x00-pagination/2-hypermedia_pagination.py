@@ -2,7 +2,7 @@
 """ 2. Hypermedia pagination """
 import csv
 import math
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 
 
 class Server:
@@ -23,7 +23,6 @@ class Server:
             self.__dataset = dataset[1:]
 
         return self.__dataset
-        return dataset[start_index: end_index]
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
@@ -52,7 +51,7 @@ class Server:
         start_index, end_index = index_range(page, page_size)
         return dataset[start_index: end_index]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """
         Retrieve a specific page of dataset with hypermedia
         Args:
