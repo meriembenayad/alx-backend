@@ -77,7 +77,7 @@ class Server:
             "page": page,
             "data": data_page,
             "next_page": page + 1 if page < total_pages else None,
-            "prev_page": page - 1 if page > 1 else None,
+            "prev_page": page - 1 if page > 0 else None,
             "total_page": total_pages
         }
 
