@@ -25,19 +25,6 @@ class Server:
         return self.__dataset
         return dataset[start_index: end_index]
 
-    def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
-        """
-        Calculate the start and end index for pagination.
-        Args:
-            - page (int): the current page number (1-indexed)
-            - page_size (int): the number of item per page
-        Return:
-            - tuple: A tuple contains the start & end idx for the page and size
-        """
-        start_index = (page - 1) * page_size
-        end_index = start_index + page_size
-        return start_index, end_index
-
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
         Retrieve a specific page of dataset
@@ -62,7 +49,7 @@ class Server:
         if page > total_pages:
             return []
 
-        start_index, end_index = self.index_range(page, page_size)
+        start_index, end_index = index_range(page, page_size)
         return dataset[start_index: end_index]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
@@ -93,3 +80,17 @@ class Server:
             "prev_page": page - 1 if page < 1 else None,
             "total_page": total_pages
         }
+
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """
+    Calculate the start and end index for pagination.
+    Args:
+        - page (int): the current page number (1-indexed)
+        - page_size (int): the number of item per page
+    Return:
+        - tuple: A tuple contains the start & end idx for the page and size
+    """
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
+    return start_index, end_index
