@@ -34,22 +34,11 @@ class Server:
             - List[List]: A list lists representing the rows of the dataset
             for the specific page
         """
-        assert isinstance(
-            page, int) and page > 0, "Page must be a positive integer"
-        assert isinstance(page_size, int) and page_size > 0, \
-            "Page size must be a positive integer"
-
-        dataset = self.dataset()
-        if page_size == 0:
-            return []
-
-        total_pages = math.ceil(len(dataset) / page_size)
-
-        if page > total_pages:
-            return []
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
 
         start_index, end_index = index_range(page, page_size)
-        return dataset[start_index: end_index]
+        return self.dataset()[start_index: end_index]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """
