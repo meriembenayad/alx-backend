@@ -57,7 +57,7 @@ class Server:
                 'total_page': 'total_page'
             }
         """
-        if not isinstance(page, int) or page <= 0:
+        if not isinstance(page, int) and page <= 0:
             page = 1
 
         data_page = self.get_page(page, page_size)
