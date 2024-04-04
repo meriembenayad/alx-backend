@@ -57,6 +57,9 @@ class Server:
                 'total_page': 'total_page'
             }
         """
+        if not isinstance(page, int) or page <= 0:
+            page = 1
+
         data_page = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
