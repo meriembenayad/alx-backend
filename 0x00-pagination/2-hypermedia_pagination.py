@@ -5,6 +5,20 @@ import math
 from typing import List, Tuple, Dict
 
 
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """
+    Calculate the start and end index for pagination.
+    Args:
+        - page (int): the current page number (1-indexed)
+        - page_size (int): the number of item per page
+    Return:
+        - tuple: A tuple contains the start & end idx for the page and size
+    """
+    start_index = (page - 1) * page_size
+    end_index = page * page_size
+    return start_index, end_index
+
+
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -34,8 +48,8 @@ class Server:
             - List[List]: A list lists representing the rows of the dataset
             for the specific page
         """
-        assert isinstance(page, int) and isinstance(page_size, int)
-        assert page > 0 and page_size > 0
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
 
         start_index, end_index = index_range(page, page_size)
         return self.dataset()[start_index: end_index]
@@ -61,24 +75,10 @@ class Server:
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
         return {
-            'page_size': len(data_page),
+            'page_size': page_size,
             'page': page,
             'data': data_page,
             'next_page': page + 1 if page < total_pages else None,
             'prev_page': page - 1 if page > 1 else None,
             'total_page': total_pages
         }
-
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    Calculate the start and end index for pagination.
-    Args:
-        - page (int): the current page number (1-indexed)
-        - page_size (int): the number of item per page
-    Return:
-        - tuple: A tuple contains the start & end idx for the page and size
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
