@@ -34,12 +34,10 @@ class Server:
             - List[List]: A list lists representing the rows of the dataset
             for the specific page
         """
-        assert type(page) == int and page > 0
-        assert type(page_size) == int and page_size > 0
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
 
         start_index, end_index = index_range(page, page_size)
-        if start_index > len(self.dataset()):
-            return []
         return self.dataset()[start_index: end_index]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
@@ -82,5 +80,5 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
         - tuple: A tuple contains the start & end idx for the page and size
     """
     start_index = (page - 1) * page_size
-    end_index = start_index + page_size
+    end_index = page * page_size
     return start_index, end_index
