@@ -76,6 +76,8 @@ class Server:
         # Ensure that the page doesn't exceed the total_page
         if page > total_pages:
             page = total_pages
+        elif page < 0:
+            page = 1
 
         data_page = self.get_page(page, page_size)
 
