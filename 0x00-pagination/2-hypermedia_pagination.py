@@ -71,8 +71,13 @@ class Server:
                 'total_page': 'total_page'
             }
         """
-        data_page = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
+
+        data_page = self.get_page(page, page_size)
+
+        # Ensure that the page doesn't exceed the total_page
+        if page > total_pages:
+            page = total_pages
 
         return {
             'page_size': page_size,
