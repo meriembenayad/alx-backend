@@ -34,12 +34,13 @@ class LFUCache(BaseCaching):
                     self.frequency.pop(discard)
                     print(f'DISCARD: {discard}')
             self.cache_data[key] = item
+            self.frequency[key] = 1
             self.keys.append(key)
 
     def get(self, key):
         """ Get item by key """
         if key is not None and key in self.cache_data:
             self.keys.remove(key)
-            self.keys.append(key)
             self.frequency[key] += 1
+            self.keys.append(key)
         return self.cache_data.get(key)
