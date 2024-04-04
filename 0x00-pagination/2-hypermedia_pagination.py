@@ -34,8 +34,8 @@ class Server:
             - List[List]: A list lists representing the rows of the dataset
             for the specific page
         """
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
+        assert type(page) == int and page > 0
+        assert type(page_size) == int and page_size > 0
 
         start_index, end_index = index_range(page, page_size)
         return self.dataset()[start_index: end_index]
@@ -57,9 +57,6 @@ class Server:
                 'total_page': 'total_page'
             }
         """
-        if not isinstance(page, int) and page <= 0:
-            page = 1
-
         data_page = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
