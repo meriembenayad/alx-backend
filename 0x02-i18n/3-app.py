@@ -17,8 +17,8 @@ def get_locale():
         Use request.accept_languages to determine the best
         match with our supported languages.
     """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
-
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
+    
 
 app = Flask(__name__)
 app.config.from_object(Config)
