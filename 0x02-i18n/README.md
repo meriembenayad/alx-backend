@@ -168,3 +168,23 @@ Hello world! You are logged in as Beyonce
 - `5-app.py`
 - `templates/5-index.html`
 </details>
+
+<details>
+<summary>6. Use user locale</summary>
+
+Change your `get_locale` function to use a user’s preferred local if it is supported.
+
+The order of priority should be
+
+1. Locale from URL parameters
+2. Locale from user settings
+3. Locale from request header
+4. Default locale
+
+Test by logging in as different users
+
+**Files:**
+
+- `6-app.py`
+- `templates/6-index.html`
+</details>
