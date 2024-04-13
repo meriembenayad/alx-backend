@@ -101,3 +101,19 @@ Reload the home page of your app and make sure that the correct messages show up
 - `translations/fr/LC_MESSAGES/messages.po`
 - `translations/en/LC_MESSAGES/messages.mo`
 - `translations/fr/LC_MESSAGES/messages.mo`
+</details>
+
+<details>
+<summary>4. Force locale with URL parameter</summary>
+
+In this task, you will implement a way to force a particular locale by passing the `locale=fr` parameter to your app’s URLs.
+
+In your `get_locale` function, detect if the incoming request contains `locale` argument and ifs value is a supported locale, return it. If not or if the parameter is not present, resort to the previous default behavior.
+
+Now you should be able to test different translations by visiting `http://127.0.0.1:5000?locale=[fr|en]`.
+
+**Visiting `http://127.0.0.1:5000/?locale=fr` should display this level 1 heading:**
+
+**Files:**
+- `4-app.py`
+- `templates/4-index.html`
