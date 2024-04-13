@@ -114,6 +114,11 @@ Now you should be able to test different translations by visiting `http://127.0.
 
 **Visiting `http://127.0.0.1:5000/?locale=fr` should display this level 1 heading:**
 
+```html
+Bonjour monde!
+```
+
 **Files:**
+
 - `4-app.py`
 - `templates/4-index.html`
